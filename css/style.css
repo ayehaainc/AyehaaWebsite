@@ -22,15 +22,16 @@ body {
     position: relative;
     margin: 0;
     min-height: 100%;
-    padding-bottom: 155px !important;
 }
 
 .content-wrapper {
-    margin: 0 auto;
+    margin-top: 70px;
+    position:relative;
+    padding-bottom: 155px !important;
 }
 /* Footer Styles */
 .footer {
-    position: fixed;
+    position: absolute;
     right: 0;
     bottom: 0;
     left: 0;
@@ -81,7 +82,4 @@ body {
     transform: scale(1.01);
     opacity: 1;
     border: 1px solid #fcbd20;
-}
-.content-wrapper{
-    margin-top: 70px;
 }

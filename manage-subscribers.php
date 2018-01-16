@@ -97,9 +97,10 @@ $subscriberList = Subscriber::loadall();
     </div>
 </div>
 <!-- /.container -->
-
 <!-- Footer -->
 <?php include "footer.php" ?>
+
+
 
 <!-- Bootstrap core JavaScript -->
 <?php include "scripts.php" ?>

@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     isset($_POST["firstname"]) && $_POST["firstname"] != "" ? $firstname = $_POST["firstname"] : $returnVal = false;
     isset($_POST["lastname"]) && $_POST["lastname"] != "" ? $lastname = $_POST["lastname"] : $returnVal = false;
 
-    //don't check password if customer is making new account
+    //don't check password if customer is only editing their account
     if(!isset($_POST["btnEdit"])){
         isset($_POST["password"]) && $_POST["password"] != "" ? $password = $_POST["password"] : $returnVal = false;
 
@@ -35,13 +35,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             //existing customer editing their profile
             //val of btn edit is the customer id of the existing customer profile
             //we will check this value agaist the session value before doing any updates on the db
-            if($CustomerId == $_POST["btnEdit"])
-            $customer = new Customer($_POST["btnEdit"]);
-            $customer->setFirstName($firstname);
-            $customer->setLastName($lastname);
-            $customer->setEmail($email);
-            $customer->save();
-            header("location:customer-profile.php");
+            if($CustomerId == $_POST["btnEdit"]){
+                $customer = new Customer($_POST["btnEdit"]);
+                $customer->setFirstName($firstname);
+                $customer->setLastName($lastname);
+                $customer->setEmail($email);
+                $customer->save();
+                header("location:customer-profile.php");
+            }
         }
         else {
             //new customer

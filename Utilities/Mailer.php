@@ -7,8 +7,13 @@ require_once 'PHPMailer/src/PHPMailer.php';
 require_once 'PHPMailer/src/SMTP.php';
 require_once 'PHPMailer/src/Exception.php';
 
+include_once ("SessionManager.php");
+include_once ("DAL/emaillog.php");
+
 class Mailer
 {
+    protected static $emailTypeId;
+
     // This is for local purposes only! In hosted environments the db_settings.php file should be outside of the webroot, such as: include("/outside-webroot/db_settings.php");
     protected static function getMailSettings() { return "mail_localsettings.php"; }
 
@@ -53,8 +58,12 @@ class Mailer
 
             $mail->send();
 
+            $emailTypeId = 1;
+            $currentDate = date('Y-m-d H:i:s');
             // Message sent
-            // We may want to log emails in the database...
+            // We want to log emails in the database...
+            $emailLog = new Emaillog(0,$recipientEmail,$currentDate,$emailTypeId);
+            $emailLog->save();
         } catch (Exception $e) {
             // Log error
             die('Mailer Error: ' . $mail->ErrorInfo);
@@ -99,8 +108,13 @@ class Mailer
             );
 
             $mail->send();
+
+            $emailTypeId = 2;
+            $currentDate = date('Y-m-d H:i:s');
             // Message sent
-            // We may want to log emails in the database...
+            // We want to log emails in the database...
+            $emailLog = new Emaillog(0,$smtpUsername,$currentDate,$emailTypeId);
+            $emailLog->save();
         } catch (Exception $e) {
             // Log error
             die('Mailer Error: ' . $mail->ErrorInfo);
@@ -144,8 +158,13 @@ class Mailer
             );
 
             $mail->send();
+
+            $emailTypeId = 3;
+            $currentDate = date('Y-m-d H:i:s');
             // Message sent
-            // We may want to log emails in the database...
+            // We want to log emails in the database...
+            $emailLog = new Emaillog(0,$email_address,$currentDate,$emailTypeId);
+            $emailLog->save();
         } catch (Exception $e) {
             // Log error
             die('Mailer Error: ' . $mail->ErrorInfo);

@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         && $_GET["id"] > 0
         && isset($_GET["cmd"])
         && $_GET["cmd"] == "edit"
-        && $_GET["id"] == $SecurityUserId){     //validate query string 'id' against customer id in session
+        && $_GET["id"] == $SecurityUserId){     //validate query string 'id' against Security user id in session
         $securityuser = new Securityuser($_GET["id"]);
         if($securityuser != null){
             //success, now use this obj to fill in the values for the form input fields in html below
@@ -140,7 +140,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
                                         $roleList = Role::loadall();
                                         if(!empty($roleList)){
                                             foreach ($roleList as $role) {
-                                                if($role->getId() == $securityuser->getRoleId()){
+                                                if(isset($securityuser) && $role->getId() == $securityuser->getRoleId()){
                                                     //skip
                                                 }
                                                 else{

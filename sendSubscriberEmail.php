@@ -11,7 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         return false;
     }
     else{
-        if($_POST['securityuserid'] == SessionManager::getSecurityUserId()){
+        $securityUserId = $_POST['securityuserid'];
+        if($securityUserId > 0 && $securityUserId == SessionManager::getSecurityUserId()){
             $email_address = strip_tags(htmlspecialchars($_POST['email']));
             $subject = strip_tags(htmlspecialchars($_POST['subject']));
             $message = strip_tags(htmlspecialchars($_POST['message']));

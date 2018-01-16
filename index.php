@@ -483,26 +483,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; <?php echo date("Y") ?>&nbsp;Ayehaa Inc. All Rights Reserved.</p>
-            <ul class="list-inline">
-                <li class="list-inline-item">
-                    <a href="#" data-toggle="modal" data-target="#exampleModal">Privacy</a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="#" data-toggle="modal" data-target="#exampleModal">Terms</a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="#" data-toggle="modal" data-target="#exampleModal">FAQ</a>
-                </li>
-            </ul>
             <?php if(SessionManager::getSecurityUserId() > 0   //Security user logged in
                 && SessionManager::getCustomerId() == 0) {
                 ?>
-                <small>Hi, <a href="admin-home.php"><?php echo SessionManager::getUsername(); ?></a> <a href="logout.php">Logout</a></small>
+                <small>Hi, <a href="admin-home.php"><?php echo SessionManager::getUsername(); ?></a> &middot; <a href="logout.php">logout</a></small>
                 <?php
             }else if(SessionManager::getCustomerId() > 0){  //customer is logged in
                 ?>
-                <small>Hi, <a href="customer-profile.php"><?php echo SessionManager::getFirstName(); ?></a> <a href="logout.php">Logout</a></small>
+                <small>Hi, <a href="customer-profile.php"><?php echo SessionManager::getFirstName(); ?></a> &middot; <a href="logout.php">logout</a></small>
                 <?php
             }
             else{   //nobody logged in
@@ -515,6 +503,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 <?php
             }
             ?>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="#" data-toggle="modal" data-target="#exampleModal">Privacy</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" data-toggle="modal" data-target="#exampleModal">Terms</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" data-toggle="modal" data-target="#exampleModal">FAQ</a>
+                </li>
+            </ul>
+            <p>&copy; <?php echo date("Y") ?>&nbsp;Ayehaa Inc. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -575,7 +575,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                         }
                         else{
                             $("#emailAddress").addClass("is-invalid");
-                            $("#emailAddress").effect( "shake" );
                             return false;
                         }
                     }

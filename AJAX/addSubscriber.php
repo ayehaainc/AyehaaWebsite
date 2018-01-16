@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $emailaddress = htmlspecialchars($_POST["email"]);
         $subscriber = Subscriber::lookup($emailaddress);
         if($subscriber != null){
-            echo "Someone has already used this email address. Please try a different one. <a class='btn btn-outline-light btn-sm' onclick='location.reload();'>Try Again</a>";
+            echo "Someone has already used this email address. Please try a different one. <a href='#' class='btn btn-outline-light btn-sm' onclick='location.reload();'>Try Again</a>";
         }
         else{
             $currentDate = date('Y-m-d H:i:s');
